@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-func NinjaStar(channel chan string, numRounds int) {
+func NinjaStar(channel chan string) {
 	rand.Seed(time.Now().UnixNano())
-
+	numRounds := 3
 	for i := 0; i < numRounds; i++ {
 		score := rand.Intn(10)
 		channel <- fmt.Sprint("You scored:", score)
@@ -19,10 +19,11 @@ func NinjaStar(channel chan string, numRounds int) {
 
 func main() {
 	channel := make(chan string)
-	numRounds := 3
-	go NinjaStar(channel, numRounds)
-	for i := 0; i < numRounds; i++ {
-		fmt.Println(<-channel)
+
+	go NinjaStar(channel)
+
+	for message := range channel {
+		fmt.Println(message)
 	}
-	fmt.Println(<-channel)
+
 }

@@ -8,6 +8,5 @@ func main() {
 	channel <- "Second "
 	fmt.Println(<-channel)
 	fmt.Println(<-channel)
-	//FIFO QUEUE
 
 }
