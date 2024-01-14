@@ -13,6 +13,8 @@ func NinjaStar(channel chan string, numRounds int) {
 		score := rand.Intn(10)
 		channel <- fmt.Sprint("You scored:", score)
 	}
+
+	close(channel)
 }
 
 func main() {
